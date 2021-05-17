@@ -3,16 +3,20 @@ A compositional approach to FRC commands
 
 ```java
 GDef.comp(
-  GBasis.bind("__complete__", ),
-  GBasis.bind("dt/polar", new Polar2D(1, 0)),
-  GBasis.on("is_blue",
-    x -> new AbstractMap.SimpleEntry<? extends String, ? extends Object>("")
+  G.bind("__complete__",
+    state -> state.get("rotations") > 10
   ),
-  GBasis.bind_new("is_blue",
-    x -> x.get("color/value").close_to(255, 0, 0)
+  G.bind_value("dt/polar", new Polar2D(1, 0)),
+  G.on("is_blue",
+    state -> new AbstractMap.SimpleEntry<>(
+      "rotations", state.get("rotations") + 1
+    )
   ),
-  GDef.world(new GBasis.Memory("rotations", 0))
-  GDef.world(new ColorAdapter())
+  G.bind_new("is_blue",
+    state -> state.get("color/value").close_to(255, 0, 0)
+  ),
+  GDef.world(new G.remember("rotations", 0)),
+  GDef.world(new ColorAdapter()),
   GDef.world(new DrivetrainAdapter()),
 )
 ```
