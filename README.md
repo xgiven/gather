@@ -13,3 +13,15 @@ GDef.comp(
   GDef.world(ControllerAdapter),
 )
 ```
+
+```java
+GDef.comp(
+  GBasis.bind_new()
+  GBasis.bind_new("is_blue",
+    x -> x.get("world/color").close_to(255, 0, 0)
+  ),
+  GDef.world(new GBasis.remember("rotations", 0))
+  GDef.world(new ColorAdapter())
+  GDef.world(new ControllerAdapter()),
+)
+```
