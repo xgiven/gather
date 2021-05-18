@@ -1,6 +1,6 @@
 public abstract class GCommand extends CommandBase implements UnaryOperator<GReality> {
   final UnaryOperator<GReality> op;
-  final GReality world = new GReality();
+  GReality world = new GReality();
   
   public GCommand(UnaryOperator<GReality> op) {
     this.op = op;
