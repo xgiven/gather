@@ -1,9 +1,10 @@
 public class ExampleCommand extends GCommand {
-  public ExampleCommand() {
+  public ExampleCommand(int n_rotations, DriveSubsystem drive, ColorSubsystem color) {
+    addRequirements(drive, color);
     super(
       GDef.comp(
-        new DrivetrainAdapter(),
-        new ColorAdapter(),
+        new DriveAdapter(drive),
+        new ColorAdapter(color),
         new Track("rotations", 0),
         GDef.bind(state -> new TurnInPlace(100, "left")),
         GDef.bind(state -> new AbstractMap.SimpleEntry<>(
@@ -13,7 +14,7 @@ public class ExampleCommand extends GCommand {
           "mem/rotations", ++state.get("mem/rotations")
         )),
         GDef.bind(state -> new AbstractMap.SimpleEntry<>(
-          "given/complete", state.get("mem/rotations") >= 10
+          "given/complete", state.get("mem/rotations") >= n_rotations
         )),
       )
     );
