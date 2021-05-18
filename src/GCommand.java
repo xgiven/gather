@@ -6,25 +6,9 @@ public abstract class GCommand extends CommandBase implements UnaryOperator<GRea
     this.op = op;
   }
   
-  public static GCommand unit() {
-    return new GCommand(
-      UnaryOperator.identity<GReality>()
-    );
-  }
-  
-  public GCommand comp(GCommand other) {
-    return new GCommand(
-      state -> this.op.compose(other.op)(state)
-    );
-  }
-  
-  public GCommand bind(Function<GReality, GCommand> f) {
-    return new GCommand(
-      state -> this.op.compose(f)(state)(state)
-    );
-  }
+  public
   
   public GReality apply(GReality given) {
-    return this.world.apply(given);
+    return this.op.apply(given);
   }
 }
