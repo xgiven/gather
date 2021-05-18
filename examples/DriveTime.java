@@ -7,7 +7,7 @@ public class DriveTime extends GCommand {
       G.during(0, time)(
         _ -> new DriveForward(drive, 100, "left")
       ),
-      G.bind(state -> new AbstractMap.SimpleEntry<>(
+      GDef.bind(state -> new AbstractMap.SimpleEntry<>(
         "given/complete", state.get("time/value").get() >= time
       ))
     );
