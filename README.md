@@ -2,7 +2,7 @@
 A compositional approach to FRC commands
 
 ```java
-GDef.comp(
+compose(
   G.bind("__complete__",
     state -> state.get("rotations") > 10
   ),
@@ -14,9 +14,18 @@ GDef.comp(
   ),
   G.bind_new("is_blue",
     state -> state.get("color/value").close_to(255, 0, 0)
-  ),
+  )
+GDef.comp(
   GDef.world(new G.remember("rotations", 0)),
   GDef.world(new ColorAdapter()),
   GDef.world(new DrivetrainAdapter()),
 )
 ```
+
+### `GDef`: A world (`GWorldAdapter`) is a monoid
+
+### `GDef`: An intent (`G`) is an endofunctor
+
+1. `GDef.world(GWorldAdapter...)`
+2. `GDef.intern()`
+3. `GDef.comp(GRepr...)`
