@@ -27,4 +27,4 @@ public class DriveTime extends GCommand {
 }
 ```
 
-UnaryOperator<T> -> (T -> UnaryOperator<T>) -> UnaryOperator<T>
+`UnaryOperator<T> -> (T -> UnaryOperator<T>) -> UnaryOperator<T>`
