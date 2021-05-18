@@ -1,4 +1,4 @@
-public class Val<T> implements Accessible<T> {
+public class Var<T> implements Accessible<T> {
   T underlying;
   
   public T get() { return underlying; }
