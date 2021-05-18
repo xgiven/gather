@@ -1,19 +1,21 @@
-public class GDef {
-  public static UnaryOperator<Map<String, Accessible<Object>>> unit() {
+public class GDef<Reality extends Map<String, Accessible<Object>>> {
+  public static UnaryOperator<Reality> unit() {
     return UnaryOperator<>.identity();
   }
   
-  public static UnaryOperator<Map<String, Accessible<Object>>> comp(
-    UnaryOperator<Map<String, Accessible<Object>>> f,
-    UnaryOperator<Map<String, Accessible<Object>>> g,
+  public static UnaryOperator<Reality> comp(
+    UnaryOperator<Reality> f, UnaryOperator<Reality> g,
   ) {
-    return state -> f(g(state));
+    return state -> f.apply(g.apply(state));
   }
   
-  // Function<Function<UnaryOperator<Map<String, Accessible<Object>>>>, Function<Map<String, Accessible<Object>>, UnaryOperator<Map<String, Accessible<Object>>>>>
-  public static Function<UnaryOperator<Map<String, Accessible<Object>>>> bind(
-    Function<Map<String, Accessible<Object>>, UnaryOperator<Map<String, Accessible<Object>>>> f
+  public static UnaryOperator<UnaryOperator<Reality>> bind(
+    Function<Reality, UnaryOperator<Reality>> f
   ) {
-    return state -> null() // TODO
+    return curr_action -> (
+      state -> curr_action.apply(
+        f.apply(state).apply(state)
+      )
+    );
   }
 }
