@@ -26,7 +26,9 @@ public abstract class GCommand extends CommandBase implements UnaryOperator<GRea
   }
   
   @Override
-  public
+  public boolean isFinished() {
+    return world.get("given/complete");
+  }
   
   public GReality apply(GReality given) {
     return this.op.apply(given);
