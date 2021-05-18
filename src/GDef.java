@@ -1,3 +1,5 @@
 public class GDef {
-  public static T unit
+  public static UnaryOperator<Map<String, Accessible<Object>>> unit() {
+    return x -> x;
+  }
 }
