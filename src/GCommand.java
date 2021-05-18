@@ -1,4 +1,4 @@
-public abstract class GCommand extends CommandBase implements UnaryOperator<GReality> {
+public abstract class GCommand extends CommandBase implements UnaryOperator<Map<String, Accessible<Object>>> {
   final UnaryOperator<Map<String, Accessible<Object>>> op;
   Map<String, Accessible<Object>> world = new HashMap();
   
