@@ -1,17 +1,17 @@
 public abstract class GCommand extends CommandBase implements UnaryOperator<GReality> {
-  final UnaryOperator<GReality> op;
-  GReality world = new GReality();
+  final UnaryOperator<Map<String, Accessible<Object>>> op;
+  Map<String, Accessible<Object>> world = new HashMap();
   
-  public GCommand(UnaryOperator<GReality> op) {
+  public GCommand(UnaryOperator<Map<String, Accessible<Object>>> op) {
     this.op = op;
   }
   
   @Override
   public void initialize() {
-    world.put("given/phase", "__init__");
-    world.put("given/complete", false);
+    world.put("given/phase", new Val<>("__init__"));
+    world.put("given/complete", new Val<>(false));
     this.execute();
-    world.put("given/phase", "__exec__");
+    world.put("given/phase", new Val<>("__exec__"));
   }
   
   @Override
@@ -21,13 +21,13 @@ public abstract class GCommand extends CommandBase implements UnaryOperator<GRea
   
   @Override
   public void end() {
-    world.put("given/phase", "__last__");
+    world.put("given/phase", new Val<>("__last__"));
     this.execute();
   }
   
   @Override
   public boolean isFinished() {
-    return world.get("given/complete");
+    return world.get("given/complete").get();
   }
   
   public GReality apply(GReality given) {
