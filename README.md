@@ -16,10 +16,10 @@ public class DriveTime extends GCommand {
           )
         )
         GDef.bind(state -> new AbstractMap.SimpleEntry<>(
-          "time-elapsed", state.get("given/time") - state.get("mem/time-start")
+          "time-elapsed", state.get("given/time").get() - state.get("mem/time-start").get()
         )),
         GDef.bind(state -> new AbstractMap.SimpleEntry<>(
-          "given/complete", state.get("time-elapsed") >= time
+          "given/complete", state.get("time-elapsed").get() >= time
         )),
       )
     );
