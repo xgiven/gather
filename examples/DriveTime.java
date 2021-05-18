@@ -4,7 +4,9 @@ public class DriveTime extends GCommand {
     super(
       GDef.bind(_ -> new DriveAdapter(drive)),
       GDef.bind(_ -> new TimeTrack()),
-      G.during(0, time, _ -> new DriveForward(drive, 100, "left")),
+      G.during(0, time)(
+        _ -> new DriveForward(drive, 100, "left")
+      ),
       G.bind(state -> new AbstractMap.SimpleEntry<>(
         "given/complete", state.get("time/value").get() >= time
       ))
