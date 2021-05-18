@@ -2,6 +2,26 @@
 A compositional approach to FRC commands
 
 ```java
+public class ExampleCommand extends GCommand {
+  final GReality world;
+  
+  public ExampleCommand() {
+    super(
+      GReality.unit()
+        .comp(new DrivetrainAdapter())
+        .comp(new ColorAdapter())
+        .fmap(state -> new AbstractMap.SimpleEntry<>(
+          "is_blue", state.get("color/value").close_to(255, 0, 0)
+        ))
+        .fmap(state -> new AbstractMap.SimpleEntry<>(
+          "rotations", state.get
+        ))
+    );
+  }
+}
+```
+
+```java
 compose(
   G.bind("__complete__",
     state -> state.get("rotations") > 10
