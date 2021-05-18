@@ -1,4 +1,4 @@
 @FunctionalInterface
 public interface GCommand {
-  public GReality run(GReality world);
+  public GReality modify(GReality world);
 }
