@@ -1,7 +1,7 @@
-public abstract class GCommandObject extends CommandBase implements UnaryOperator<GReality> {
+public abstract class GCommand extends CommandBase implements UnaryOperator<GReality> {
   final UnaryOperator<GReality> world;
   
-  public GCommandObject(UnaryOperator<GReality> world) {
+  public GCommand(UnaryOperator<GReality> world) {
     this.world = world;
   }
   
