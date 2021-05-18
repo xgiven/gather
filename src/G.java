@@ -1,7 +1,7 @@
 public class G {
   public static comp(UnaryOperator<Map<String, Accessible<Object>>>... ops) {
-    return ops.stream().reduce(
-      GDef.unit(),
+    return base -> ops.stream().reduce(
+      base,
       (a, x) -> a.andThen(x)
     );
   }
