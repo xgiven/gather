@@ -12,4 +12,22 @@ public class GDef {
       )
     );
   }
+  
+  public static UnaryOperator<UnaryOperator<Map<String, Accessible<Object>>>> bind(
+    Function<Map<String, Accessible<Object>>, Map.Entry<String, Accessible<Object>>> f
+  ) {
+    return curr_action -> (
+      state -> curr_action.apply(
+        this.bindEntryInternal(f, state)
+      )
+    );
+  }
+  
+  public static Map<String, Accessible<Object>> bindEntryInternal(
+    Function<Map<String, Accessible<Object>>, Map.Entry<String, Accessible<Object>>> f,
+    Map<String, Accessible<Object>> state
+  ) {
+    Map.Entry<String, Accessible<Object>>> new_entry = f.apply(state);
+    return state.put(new_entry.getKey(), new_entry.getValue());
+  }
 }
