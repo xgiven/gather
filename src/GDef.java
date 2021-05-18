@@ -1,10 +1,10 @@
-public class GDef<Reality extends Map<String, Accessible<Object>>> {
-  public static UnaryOperator<Reality> unit() {
+public class GDef {
+  public static UnaryOperator<Map<String, Accessible<Object>>> unit() {
     return UnaryOperator<>.identity();
   }
   
-  public static UnaryOperator<UnaryOperator<Reality>> bind(
-    Function<Reality, UnaryOperator<Reality>> f
+  public static UnaryOperator<UnaryOperator<Map<String, Accessible<Object>>>> bind(
+    Function<Map<String, Accessible<Object>>, UnaryOperator<Map<String, Accessible<Object>>>> f
   ) {
     return curr_action -> (
       state -> curr_action.apply(
