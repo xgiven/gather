@@ -6,7 +6,9 @@ public class ExampleCommand extends GCommand {
         new DriveAdapter(drive),
         new ColorAdapter(color),
         new Track("rotations", 0),
-        GDef.bind(state -> new TurnInPlace(100, "left")),
+        GDef.bind(state -> (state.get("given/complete"))?
+          new StopDrivetrain(drive) : new TurnInPlace(drive, 100, "left")
+        ),
         GDef.bind(state -> new AbstractMap.SimpleEntry<>(
           "is-blue", state.get("color/value").close_to(255, 0, 0)
         )),
