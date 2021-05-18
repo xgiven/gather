@@ -8,10 +8,10 @@ public abstract class GCommand extends CommandBase implements UnaryOperator<GRea
   
   @Override
   public void initialize() {
-    world.put("given/phase", new Val<>("__init__"));
-    world.put("given/complete", new Val<>(false));
+    world.put("given/phase", new ARef<>("__init__"));
+    world.put("given/complete", new ARef<>(false));
     this.execute();
-    world.put("given/phase", new Val<>("__exec__"));
+    world.put("given/phase", new ARef<>("__exec__"));
   }
   
   @Override
@@ -21,7 +21,7 @@ public abstract class GCommand extends CommandBase implements UnaryOperator<GRea
   
   @Override
   public void end() {
-    world.put("given/phase", new Val<>("__last__"));
+    world.put("given/phase", new ARef<>("__last__"));
     this.execute();
   }
   
