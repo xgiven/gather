@@ -5,7 +5,7 @@ A compositional approach to FRC commands
 public class DriveTime extends GCommand {
   public DriveTime(int time, DriveSubsystem drive) {
     addRequirements(drive);
-    super(G.comp(
+    super(
         GDef.bind(_ -> new DriveAdapter(drive)),
         G.until_completion(_ -> new DriveForward(drive, 100, "left"))
         GDef.bind(_ -> new Track("time-start", null)),
@@ -21,7 +21,7 @@ public class DriveTime extends GCommand {
         GDef.bind(state -> new AbstractMap.SimpleEntry<>(
           "given/complete", state.get("time-elapsed").get() >= time
         )),
-    ));
+    );
   }
 }
 ```
