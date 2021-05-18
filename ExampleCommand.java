@@ -18,3 +18,23 @@ public class ExampleCommand extends GCommandObject {
     );
   }
 }
+
+public class ExampleCommand extends GCommand {
+  public ExampleCommand() {
+    super(
+      GDef.comp(
+        new DrivetrainAdapter(),
+        new ColorAdapter(),
+        new Track("rotations", 0),
+        GDef.bind(state -> new TurnInPlace(100, "left")),
+        GDef.bind(state -> new MapUpdate<>(
+          "mem/rotations", ++state.get("mem/rotations")
+        )),
+        G.when("is_blue", state -> new MapUpdate<>(
+          "mem/rotations", state.get("mem/rotations") >= 10
+        )),
+        GDef.bind(state -> new MapUpdate)
+      )
+    );
+  }
+}
