@@ -1,4 +1,4 @@
-public static class MapUpdate<K, V> extends Object implements Map.Entry<K, V> {
+public static class MapUpdate<K, V> extends Object implements Map.Entry<K, V>, UnaryOperator<? extends Map<? extends K, ? extends V>> {
   final K key;
   final V value;
   final Map.Entry<? extends K, ? extends V> entry;
@@ -36,5 +36,9 @@ public static class MapUpdate<K, V> extends Object implements Map.Entry<K, V> {
     } else {
       return this.entry.setValue(value);
     }
+  }
+  
+  public <T extends Map<K2, V2>, K2 extends K, V2 extends V> T apply(T given) {
+    // TODO
   }
 }
