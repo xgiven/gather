@@ -5,10 +5,13 @@ public class DriveTime extends GCommand {
       GDef.comp(
         new DriveAdapter(drive),
         new Track("time-start", null),
+        G.until_completion(new DriveForward(drive, 100, "left"))
         GDef.bind(state -> new AbstractMap.SimpleEntry<>(
           "time-elapsed", state.get("given/time") - state.get("mem/time-start")
         )),
-        
+        GDef.bind(state -> new AbstractMap.SimpleEntry<>(
+          "given/complete", state.get("time-elapsed") >= time
+        )),
       )
     );
   }
