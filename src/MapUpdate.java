@@ -1,18 +1,21 @@
-public static class MapUpdate<K, V> extends Object implements Map.Entry<K, V>, UnaryOperator<? extends Map<K, V>>, GCommand {
+public static class MapUpdate<K, V> extends GCommand implements Map.Entry<K, V>, UnaryOperator<? extends Map<K, V>> {
   final K key;
   final V value;
   final Map.Entry<? extends K, ? extends V> entry;
+  final UnaryOperator<GReality> apply_op = state -> state.world;
   
   public MapUpdate(K key, V value) {
     this.key = key;
     this.value = value;
     this.entry = null;
+    super(this.apply_op);
   }
   
   public MapUpdate(Map.Entry<? extends K, ? extends V> entry) {
     this.key = entry.getKey();
     this.value = entry.getValue();
     this.entry = entry;
+    super(this.apply_op);
   }
   
   public K getKey() { return (
