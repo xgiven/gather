@@ -15,8 +15,12 @@ public static class MapUpdate<K, V> extends Object implements Map.Entry<K, V> {
     this.entry = entry;
   }
   
-  public K getKey() { return this.key; }
-  public V getValue() { return this.value; }
+  public K getKey() { return (
+    (this.entry)? this.entry.getKey() : this.key
+  ); }
+  public V getValue() { return (
+    (this.entry)? this.entry.getValue() : this.value
+  ); }
   
   public int hashCode() { return Objects.hash(this.key, this.value); }
   public boolean equals(Object o) {
@@ -30,9 +34,7 @@ public static class MapUpdate<K, V> extends Object implements Map.Entry<K, V> {
       throw new UnsupportedOperationException("Cannot mutate a MapUpdate<K, V>");
       return null;
     } else {
-      V return_value = this.entry.setValue(value);
-      this.value = this.entry.getValue();
-      return return_value;
+      return this.entry.setValue(value);
     }
   }
 }
