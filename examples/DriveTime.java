@@ -2,21 +2,12 @@ public class DriveTime extends GCommand {
   public DriveTime(int time, DriveSubsystem drive) {
     addRequirements(drive);
     super(
-        GDef.bind(_ -> new DriveAdapter(drive)),
-        G.until_completion(_ -> new DriveForward(drive, 100, "left"))
-        GDef.bind(_ -> new Track("time-start", null)),
-        GDef.bind(_ -> new TimeTrack()),
-        G.if_equal("given/phase", "__init__",
-          state -> new AbstractMap.SimpleEntry<>(
-            "mem/time-start", state.get("time.value").get()
-          )
-        ),
-        GDef.bind(state -> new AbstractMap.SimpleEntry<>(
-          "time-elapsed", state.get("time/value").get() - state.get("mem/time-start").get()
-        )),
-        GDef.bind(state -> new AbstractMap.SimpleEntry<>(
-          "given/complete", state.get("time-elapsed").get() >= time
-        )),
+      GDef.bind(_ -> new DriveAdapter(drive)),
+      GDef.bind(_ -> new TimeTrack()),
+      G.during(0, time, _ -> new DriveForward(drive, 100, "left")),
+      G.bind(state -> new AbstractMap.SimpleEntry<>(
+        "given/complete", state.get("time/value").get() >= time
+      ))
     );
   }
 }
