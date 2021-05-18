@@ -14,6 +14,20 @@ public abstract class GCommand extends CommandBase implements UnaryOperator<GRea
     world.put("given/phase", "__exec__");
   }
   
+  @Override
+  public void execute() {
+    world = this.op.apply(world);
+  }
+  
+  @Override
+  public void end() {
+    world.put("given/phase", "__last__");
+    this.execute();
+  }
+  
+  @Override
+  public
+  
   public GReality apply(GReality given) {
     return this.op.apply(given);
   }
