@@ -3,7 +3,7 @@ public abstract class GCommand extends CommandBase implements UnaryOperator<Map<
   Map<String, Accessible<Object>> world = new HashMap();
   
   public GCommand(UnaryOperator<Map<String, Accessible<Object>>>... ops) {
-    this.op = G.comp(ops);
+    this.op = (G.comp(ops))(G.unit());
   }
   
   @Override
