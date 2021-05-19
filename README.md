@@ -6,7 +6,7 @@ public class DriveTime extends GCommand {
   public DriveTime(int time, DriveSubsystem drive) {
     addRequirements(drive);
     super(
-      GDef.bind(_ -> new DriveAdapter(drive)),
+      GDef.bind(_ -> new DriveAdapter(drive)), // Use a GWorldAdapter (high-level) to a Subsystem (low-level)
       GDef.bind(_ -> new TimeTrack()),
       G.during(0, time).apply(
         _ -> new DriveForward(drive, 100, "left")
