@@ -16,5 +16,7 @@ public class G {
   
   public static UnaryOperator<UnaryOperator<Map<String, Accessible<Object>>>> during(
     int start, int end
-  ) { /* TODO */ }
+  ) {
+    return f -> GDef.bind(state -> /* TODO */);
+  }
 }
