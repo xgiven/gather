@@ -19,6 +19,6 @@ public class G {
   ) {
     return f -> GDef.bind(state -> (
       (state.get("time/value").get() >= start) && (state.get("time/value").get() < end)
-    )? f.apply(state) : state);
+    )? f.apply(state) : GDef.unit());
   }
 }
