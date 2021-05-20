@@ -14,7 +14,7 @@ public class DriveTime extends GCommand {
       GDef.bind(state -> new AbstractMap.SimpleEntry<>( // Map entries are a basic modifier
         "given/complete", state.get("time/value").get() >= time // Finish when time passed
       ))
-    ); // All of these are going to be "gathered" together by reversed function composition
+    ); // All of these are going to be "gathered" together by reverse function composition
   }
 }
 ```
