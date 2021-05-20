@@ -17,6 +17,8 @@ public class G {
   public static UnaryOperator<UnaryOperator<Map<String, Accessible<Object>>>> during(
     int start, int end
   ) {
-    return f -> GDef.bind(state -> /* TODO */);
+    return f -> GDef.bind(state -> (
+      (state.get("time/value").get() >= start) && (state.get("time/value").get() < end)
+    )? f.apply(state) : state);
   }
 }
