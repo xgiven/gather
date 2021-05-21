@@ -32,7 +32,7 @@ public class GDef {
     if (new_state.containsKey(new_entry.getKey())) {
       new_state.get(new_entry.getKey()).set(new_entry.getValue());
     } else {
-      new_state.put(new_entry.getKey(), new_entry.getValue().get());
+      new_state.put(new_entry.getKey(), new_entry.getValue());
     }
     return new_state;
   }
