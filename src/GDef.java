@@ -30,9 +30,7 @@ public class GDef {
     Map.Entry<String, Accessible<Object>>> new_entry = f.apply(state);
     Map<String, Accessible<Object>> new_state = state.clone();
     if (new_state.containsKey(new_entry.getKey())) {
-      new_state.get(new_entry.getKey()).set((
-        new_entry.getValue() instanceof Accessible<? extends Object>
-      )? new_entry.getValue().get() : new_entry.getValue());
+      new_state.get(new_entry.getKey()).set(new_entry.getValue());
     } else {
       new_state.put(new_entry.getKey(), new_entry.getValue().get());
     }
