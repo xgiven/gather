@@ -11,7 +11,7 @@ public abstract class GCommand extends CommandBase implements UnaryOperator<Map<
     world.put("given/phase", new ARef<>("__init__"));
     world.put("given/complete", new ARef<>(false));
     this.execute();
-    world.put("given/phase", new ARef<>("__exec__"));
+    world.put("given/phase", "__exec__");
   }
   
   @Override
@@ -21,7 +21,7 @@ public abstract class GCommand extends CommandBase implements UnaryOperator<Map<
   
   @Override
   public void end() {
-    world.put("given/phase", new ARef<>("__last__"));
+    world.put("given/phase", "__last__");
     this.execute();
   }
   
