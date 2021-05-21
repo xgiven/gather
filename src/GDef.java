@@ -28,6 +28,8 @@ public class GDef {
     Map<String, Accessible<Object>> state
   ) {
     Map.Entry<String, Accessible<Object>>> new_entry = f.apply(state);
-    return state.put(new_entry.getKey(), new_entry.getValue());
+    Map<String, Accessible<Object>> new_state = state.clone();
+    new_state.put(new_entry.getKey(), new_entry.getValue());
+    return new_state;
   }
 }
