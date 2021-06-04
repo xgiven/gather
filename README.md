@@ -3,6 +3,20 @@ A compositional approach to FRC commands
 
 ```java
 public class DriveTime extends GCommand {
+  public DriveTime(int duration, double speed, DriveSubsystem drive) {
+    addRequirements(drive);
+    super(
+      GDef.intern("@dt", new DriveAdapter(drive)),
+      GDef.intern("@time", new Track(Timer::getFPGATimestamp)),
+      GDef.bind("@dt/angle", new ConstRef<>(0)),
+      TODO...
+    );
+  }
+}
+```
+
+```java
+public class DriveTime extends GCommand {
   public DriveTime(int time, DriveSubsystem drive) {
     addRequirements(drive);
     super( // Commands are functions/values, not classes (this is for integration purposes)
