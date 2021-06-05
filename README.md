@@ -7,9 +7,10 @@ public class DriveTime extends GCommand {
     addRequirements(drive);
     super(
       GDef.intern("@dt", new DriveAdapter(drive)),
-      GDef.intern("@time", new Track(Timer::getFPGATimestamp)),
-      GDef.bind("@dt/angle", new ConstRef<>(0)),
-      TODO...
+      GDef.intern("@time", new TimeAdapter()),
+      GDef.bindValue("@dt/angle", 0),
+      GDef.bindValue("@dt/speed", speed),
+      GDef.bind("@dt/active?", "@time/value", _ -> TODO)
     );
   }
 }
